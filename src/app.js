@@ -1,23 +1,17 @@
+const path = require('path');
 const express = require('express');
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('hello from express!')
-});
-
-app.get('/about', (req, res) => {
-    res.send('about page')
-});
+app.use(express.static(path.join(__dirname, '../public')))
 
 app.get('/weather', (req, res) => {
-    res.send('weather page')
-});
-
-app.get('/help', (req, res) => {
-    res.send('help page')
+    res.send({
+        forecast: 'It is raining',
+        location: 'California'
+    })
 });
 
 app.listen(PORT, () => {
